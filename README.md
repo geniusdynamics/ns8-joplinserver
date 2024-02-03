@@ -1,43 +1,20 @@
 # ns8-joplin
 
-This is a template module for [NethServer 8](https://github.com/NethServer/ns8-core).
-To start a new module from it:
+This is an NS8 module for [Joplin](https://joplinapp.org/).
 
-1. Click on [Use this template](https://github.com/NethServer/ns8-joplin/generate).
-   Name your repo with `ns8-` prefix (e.g. `ns8-mymodule`). 
-   Do not end your module name with a number, like ~~`ns8-baaad2`~~!
+Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device.
 
-1. Clone the repository, enter the cloned directory and
-   [configure your GIT identity](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup#_your_identity)
-
-1. Rename some references inside the repo:
-   ```
-   modulename=$(basename $(pwd) | sed 's/^ns8-//')
-   git mv imageroot/systemd/user/joplin.service imageroot/systemd/user/${modulename}.service
-   git mv tests/joplin.robot tests/${modulename}.robot
-   sed -i "s/joplin/${modulename}/g" $(find .github/ * -type f)
-   git commit -a -m "Repository initialization"
-   ```
-
-1. Edit this `README.md` file, by replacing this section with your module
-   description
-
-1. Adjust `.github/workflows` to your needs. `clean-registry.yml` might
-   need the proper list of image names to work correctly. Unused workflows
-   can be disabled from the GitHub Actions interface.
-
-1. Commit and push your local changes
 
 ## Install
 
 Instantiate the module with:
 
-    add-module ghcr.io/nethserver/joplin:latest 1
+    add-module ghcr.io/compgeniuses/joplin:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "joplin1", "image_name": "joplin", "image_url": "ghcr.io/nethserver/joplin:latest"}
+    {"module_id": "joplin1", "image_name": "joplin", "image_url": "ghcr.io/compgeniuses/joplin:latest"}
 
 ## Configure
 
@@ -165,7 +142,7 @@ podman exec -ti   joplin-app sh
 Test the module using the `test-module.sh` script:
 
 
-    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/joplin:latest
+    ./test-module.sh <NODE_ADDR> ghcr.io/compgeniuses/joplin:latest
 
 The tests are made using [Robot Framework](https://robotframework.org/)
 
