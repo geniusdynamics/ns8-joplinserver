@@ -7,7 +7,8 @@
     "status": {
         "services": "Serviço | Serviços",
         "app_instance": "Instância do aplicativo",
-        "joplin_url": "Go to Joplin",
+        "joplin_url": "Joplin URL",
+        "open_joplin_page": "Go to Joplin",
         "title": "Estado"
     },
     "error": {
