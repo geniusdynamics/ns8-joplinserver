@@ -32,6 +32,7 @@ host = data.get("host", "")
 port = data.get("TCP_PORT", "")
 url = host+":"+port
 APP_BASE_URL = "https://"+url #"https://"+host
+APP_PORT=port = data.get("TCP_PORT", "")
 
 # DB Config
 POSTGRES_DB = data.get("POSTGRES_DB", "joplin")
