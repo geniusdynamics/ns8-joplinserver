@@ -1,7 +1,3 @@
-<!--
-  Copyright (C) 2023 Nethesis S.r.l.
-  SPDX-License-Identifier: GPL-3.0-or-later
--->
 <template>
   <cv-grid fullWidth>
     <cv-row>
@@ -40,6 +36,27 @@
       </cv-column>
     </cv-row>
     <cv-row>
+      <template v-if="host">
+        <cv-column :md="4" :max="4">
+          <NsInfoCard
+            light
+            :title="$t('status.joplin_url')"
+            :icon="Settings32"
+            :loading="loading.getStatus"
+            class="min-height-card"
+          >
+          <template slot="content">
+            <div class="card-rows">
+              <div class="card-row">
+                <NsButton kind="ghost" :icon="Launch20" @click="goToJoplin">
+                  {{ $t("status.open_joplin_page") }}
+                </NsButton>
+              </div>
+            </div>
+          </template>
+          </NsInfoCard>
+        </cv-column>
+      </template>
       <cv-column :md="4" :max="4">
         <NsInfoCard
           light
@@ -259,26 +276,21 @@ import {
   TaskService,
   IconService,
   UtilService,
-  PageTitleService,
 } from "@nethserver/ns8-ui-lib";
-
+import Settings32 from "@carbon/icons-vue/es/settings/32"; 
 export default {
   name: "Status",
-  mixins: [
-    TaskService,
-    QueryParamService,
-    IconService,
-    UtilService,
-    PageTitleService,
-  ],
+  mixins: [TaskService, QueryParamService, IconService, UtilService],
   pageTitle() {
     return this.$t("status.title") + " - " + this.appName;
   },
   data() {
     return {
+      Settings32,
       q: {
         page: "status",
       },
+      host: "",
       urlCheckInterval: null,
       isRedirectChecked: false,
       redirectTimeout: 0,
@@ -345,8 +357,58 @@ export default {
   created() {
     this.getStatus();
     this.listBackupRepositories();
+    this.getConfiguration();
   },
   methods: {
+    goToJoplin() {
+        window.open('http://' + this.host);
+    },
+    async getConfiguration() {
+      this.loading.getConfiguration = true;
+      this.error.getConfiguration = "";
+      const taskAction = "get-configuration";
+
+      // register to task error
+      this.core.$root.$off(taskAction + "-aborted");
+      this.core.$root.$once(
+        taskAction + "-aborted",
+        this.getConfigurationAborted
+      );
+
+      // register to task completion
+      this.core.$root.$off(taskAction + "-completed");
+      this.core.$root.$once(
+        taskAction + "-completed",
+        this.getConfigurationCompleted
+      );
+
+      const res = await to(
+        this.createModuleTaskForApp(this.instanceName, {
+          action: taskAction,
+          extra: {
+            title: this.$t("action." + taskAction),
+            isNotificationHidden: true,
+          },
+        })
+      );
+      const err = res[0];
+
+      if (err) {
+        console.error(`error creating task ${taskAction}`, err);
+        this.error.getConfiguration = this.getErrorMessage(err);
+        this.loading.getConfiguration = false;
+        return;
+      }
+    },
+    getConfigurationAborted(taskResult, taskContext) {
+      console.error(`${taskContext.action} aborted`, taskResult);
+      this.error.getConfiguration = this.core.$t("error.generic_error");
+      this.loading.getConfiguration = false;
+    },
+    getConfigurationCompleted(taskContext, taskResult) {
+      const config = taskResult.output;
+      this.host = config.host;
+    },
     async getStatus() {
       this.loading.getStatus = true;
       this.error.getStatus = "";

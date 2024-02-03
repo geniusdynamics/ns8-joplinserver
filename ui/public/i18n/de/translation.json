@@ -32,6 +32,7 @@
         "app_images": "App-Abbild | App-Abbilder",
         "no_services": "Keine Dienste",
         "app_instance": "App-Instanz",
+        "joplin_url": "Go to Joplin",
         "mount": "Einbindepunkt",
         "title": "Status",
         "installation_node": "Knoten der Installation",

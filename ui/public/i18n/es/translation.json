@@ -32,6 +32,7 @@
         "app_images": "Imagen de la aplicación | Imágenes de la aplicación",
         "no_services": "No hay servicios",
         "app_instance": "Instancia de la aplicación",
+        "joplin_url": "Go to Joplin",
         "mount": "Montar",
         "title": "Estado",
         "installation_node": "Nodo de instalación",

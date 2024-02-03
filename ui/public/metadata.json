@@ -1,19 +1,19 @@
 {
-  "name": "kickstart",
+  "name": "Joplin",
   "description": {
-    "en": "My kickstart module"
+    "en": "Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device."
   },
-  "categories": [],
+  "categories": [documentation],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Martin Bhuong",
+      "email": "martin@genius.ke"
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.kickstart.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-kickstart"
+    "documentation_url": "https://joplinapp.org/help/",
+    "bug_url": "https://github.com/compgeniuses/ns8-joplin",
+    "code_url": "https://github.com/compgeniuses/ns8-joplin"
   },
-  "source": "ghcr.io/nethserver/kickstart"
+  "source": "ghcr.io/compgeniuses/joplin"
 }

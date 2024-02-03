@@ -24,8 +24,8 @@
         <cv-tile light>
           <cv-form @submit.prevent="configureModule">
             <cv-text-input
-              :label="$t('settings.app_base_url')"
-              placeholder="kickstart.example.org"
+              :label="$t('settings.joplin_fqdn')"
+              placeholder="joplin.example.org"
               v-model.trim="host"
               class="mg-bottom"
               :invalid-message="$t(error.host)"

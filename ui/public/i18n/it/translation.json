@@ -15,6 +15,7 @@
         "no_services": "Nessun servizio",
         "no_images": "Nessuna immagine",
         "app_images": "Immagine app|Immagini app",
+        "joplin_url": "Go to Joplin",
         "app_instance": "Istanza app",
         "app_volumes": "Volume app|Volumi app",
         "installation_node": "Nodo",
