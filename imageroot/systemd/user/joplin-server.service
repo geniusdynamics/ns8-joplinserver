@@ -33,6 +33,13 @@ ExecStart=/usr/bin/podman run \
     --env=JOPLIN_DBNAME=${POSTGRES_DATABASE} \
     --env=JOPLIN_DBUSER=${POSTGRES_USER} \
     --env=JOPLIN_DBPASS=${POSTGRES_PASSWORD} \
+    --env=APP_BASE_URL=${APP_BASE_URL} \
+    --label=traefik.http.routers.joplin-app-secure.rule=Host(${APP_BASE_URL}) \
+    --label=traefik.http.routers.joplin-app-secure.entrypoints=https \
+    --label=traefik.http.middlewares.joplin-app-https-redirect.redirectscheme.scheme=https \
+    --label=traefik.http.routers.joplin-app.entrypoints=http \
+    --label=traefik.http.routers.joplin-app.rule=Host(${APP_BASE_URL}) \
+    --label=traefik.http.middlewares.joplin-app-https-header.headers.customrequestheaders.X-Forwarded-Proto=http \
     ${SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/joplin-server.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/joplin-server.ctr-id
