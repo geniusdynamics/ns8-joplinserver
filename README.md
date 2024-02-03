@@ -43,6 +43,14 @@ api-cli run configure-module --agent module/joplin1 --data - <<EOF
 EOF
 ```
 
+## Default Login Credetnilas
+
+Kindly Change these credentila sthe moment you login to  `joplin`.
+
+Default Login Credetnials are:
+- `Email`: admin@localhost
+- `Password`: admin
+
 The above command will:
 - start and configure the joplin instance
 - configure a virtual host for trafik to access the instance
