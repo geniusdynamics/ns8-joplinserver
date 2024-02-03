@@ -12,8 +12,8 @@
   ],
   "docs": {
     "documentation_url": "https://joplinapp.org/help/",
-    "bug_url": "https://github.com/compgeniuses/ns8-joplin",
-    "code_url": "https://github.com/compgeniuses/ns8-joplin"
+    "bug_url": "https://github.com/compgeniuses/ns8-joplinserver",
+    "code_url": "https://github.com/compgeniuses/ns8-joplinserver"
   },
   "source": "ghcr.io/compgeniuses/joplin"
 }
