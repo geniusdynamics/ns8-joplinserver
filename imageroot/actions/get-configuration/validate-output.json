@@ -1,11 +1,11 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Get kickstart settings",
+    "title": "Get joplin settings",
     "$id": "http://nethserver.org/json-schema/task/input/kickstart/get-configuration",
-    "description": "Get kickstart settings",
+    "description": "Get joplin settings",
     "examples": [
         {
-            "host": "kickstart.domain.org",
+            "host": "joplin.domain.org",
             "http2https": true,
             "lets_encrypt": true,
             "POSTGRES_DB": "matomo,m1",
@@ -22,7 +22,7 @@
     "properties": {
         "host": {
             "type": "string",
-            "description": "Host name for the application, like 'kickstart.domain.org'",
+            "description": "Host name for the application, like 'joplin.domain.org'",
             "format": "idn-hostname"
         },
         "lets_encrypt": {
