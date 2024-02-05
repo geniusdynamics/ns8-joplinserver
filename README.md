@@ -55,6 +55,19 @@ The above command will:
 - start and configure the joplin instance
 - configure a virtual host for trafik to access the instance
 
+## EMail configs
+
+```
+MAILER_ENABLED=1
+MAILER_HOST=smtp.gmail.com 12
+MAILER_PORT=587
+MAILER_SECURITY=starttls
+MAILER_AUTH_USER=my_email_address
+MAILER_AUTH_PASSWORD=my_password
+MAILER_NOREPLY_NAME=JoplinServer
+MAILER_NOREPLY_EMAIL=my_email_address
+```
+
 ## Get the configuration
 You can retrieve the configuration with
 
