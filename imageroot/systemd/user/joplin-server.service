@@ -34,6 +34,14 @@ ExecStart=/usr/bin/podman run \
     --env=JOPLIN_DBUSER=${POSTGRES_USER} \
     --env=JOPLIN_DBPASS=${POSTGRES_PASSWORD} \
     --env=APP_BASE_URL=${APP_BASE_URL} \
+    --env=MAILER_ENABLED=1 \
+    --env=MAILER_SECURITY=starttls \
+    --env=MAILER_HOST=${SMTP_HOST} \
+    --env=MAILER_PORT=${SMTP_PORT} \
+    --env=MAILER_AUTH_USER=${SMTP_USERNAME} \
+    --env=MAILER_AUTH_PASSWORD=${SMTP_PASSWORD} \
+    --env=MAILER_NOREPLY_EMAIL=JoplinServer \
+    --env=MAILER_NOREPLY_NAME=${SMTP_USERNAME} \
     ${SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/joplin-server.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/joplin-server.ctr-id
