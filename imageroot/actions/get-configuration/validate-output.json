@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Get joplin settings",
-    "$id": "http://nethserver.org/json-schema/task/input/kickstart/get-configuration",
+    "$id": "http://nethserver.org/json-schema/task/input/joplin/get-configuration",
     "description": "Get joplin settings",
     "examples": [
         {
