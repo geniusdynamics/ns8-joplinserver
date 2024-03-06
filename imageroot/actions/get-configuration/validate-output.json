@@ -1,14 +1,14 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Get joplin settings",
-    "$id": "http://nethserver.org/json-schema/task/input/joplin/get-configuration",
-    "description": "Get joplin settings",
+    "title": "Configure joplin",
+    "$id": "http://nethserver.org/json-schema/task/input/joplin/configure-module",
+    "description": "Configure joplin",
     "examples": [
         {
             "host": "joplin.domain.org",
             "http2https": true,
             "lets_encrypt": true,
-            "POSTGRES_DB": "matomo,m1",
+            "POSTGRES_DB": "joplin,m1",
             "POSTGRES_USER": "mysql",
             "POSTGRES_PASSWORD": "mysql"
         }
