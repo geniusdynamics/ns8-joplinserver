@@ -1,16 +1,13 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Configure joplin",
-    "$id": "http://nethserver.org/json-schema/task/input/kickstart/configure-module",
+    "$id": "http://nethserver.org/json-schema/task/input/joplin/configure-module",
     "description": "Configure joplin",
     "examples": [
         {
             "host": "joplin.domain.org",
             "http2https": true,
-            "lets_encrypt": true,
-            "POSTGRES_DB": "joplin,m1",
-            "POSTGRES_USER": "mysql",
-            "POSTGRES_PASSWORD": "mysql"
+            "lets_encrypt": true
         }
     ],
     "type": "object",
@@ -34,15 +31,6 @@
             "type": "boolean",
             "title": "HTTP to HTTPS redirection",
             "description": "Redirect all the HTTP requests to HTTPS"
-        },
-        "POSTGRES_DB": {
-            "type": "string"
-        },
-        "POSTGRES_USER": {
-            "type": "string"
-        },
-        "POSTGRES_PASSWORD": {
-            "type": "string"
         }
     }
 }
