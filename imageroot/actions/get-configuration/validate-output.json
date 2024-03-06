@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Configure joplin",
-    "$id": "http://nethserver.org/json-schema/task/input/joplin/configure-module",
-    "description": "Configure joplin",
+    "title": "get configuration joplin",
+    "$id": "http://nethserver.org/json-schema/task/input/joplin/get-configuration",
+    "description": "GEt Joplin Configuration",
     "examples": [
         {
             "host": "joplin.domain.org",
