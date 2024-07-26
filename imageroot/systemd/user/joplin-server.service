@@ -27,12 +27,8 @@ ExecStart=/usr/bin/podman run \
     --cgroups=no-conmon \
     --replace --name=%N \
     --env-file=smarthost.env \
-    --env=JOPLIN_* \
-    --env=JOPLIN_DBENGINE=postgresql \
-    --env=JOPLIN_DBHOST=127.0.0.1 \
-    --env=JOPLIN_DBNAME=${POSTGRES_DATABASE} \
-    --env=JOPLIN_DBUSER=${POSTGRES_USER} \
-    --env=JOPLIN_DBPASS=${POSTGRES_PASSWORD} \
+    --env-file=%S/state/joplin-db.env \
+    --env-file=smarthost.env \
     --env=APP_BASE_URL=${APP_BASE_URL} \
     --env=MAILER_ENABLED=1 \
     --env=MAILER_SECURITY=starttls \
