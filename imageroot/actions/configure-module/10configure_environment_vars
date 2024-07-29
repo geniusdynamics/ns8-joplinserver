@@ -52,8 +52,8 @@ app_config = {
     "MAILER_PORT": SMTP_PORT,
     "MAILER_AUTH_USER": SMTP_USERNAME,
     "MAILER_AUTH_PASSWORD": SMTP_PASSWORD,
-    "MAILER_NOREPLY_EMAIL": SMTP_USERNAME,
-    "MAILER_NOREPLY_NAME": "JoplinServer",
+    "MAILER_NOREPLY_EMAIL": "JoplinServer",
+    "MAILER_NOREPLY_NAME": SMTP_USERNAME,
 }
 agent.write_env("app.env", app_config)
 
