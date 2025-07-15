@@ -14,7 +14,7 @@ images=()
 repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 # Configure the image name
 reponame="joplin"
-APP_VERSION="3.0.1-beta"
+APP_VERSION="3.3.13"
 
 # Create a new empty container image
 container=$(buildah from scratch)
