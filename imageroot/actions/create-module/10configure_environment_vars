@@ -39,7 +39,7 @@ db_config = {
 agent.write_envfile("database.env", db_config)
 
 joplin_db_config = {
-    "JOPLIN_DBENGINE": "postgresql",
+    "JOPLIN_DBENGINE": "pg",
     "JOPLIN_DBHOST": "joplin-pgsql",
     "JOPLIN_DBNAME": POSTGRES_DB,
     "JOPLIN_DBUSER": POSTGRES_USER,

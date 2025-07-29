@@ -21,17 +21,6 @@ host = data.get("host", "")
 port = data.get("TCP_PORT", "")
 url = host + ":" + port
 APP_BASE_URL = "https://" + host  # "https://"+host
-APP_PORT = port = data.get("TCP_PORT", "")
-# --env=APP_BASE_URL=${APP_BASE_URL} \
-#     --env=MAILER_ENABLED=1 \
-#     --env=MAILER_SECURITY=starttls \
-#     --env=MAILER_HOST=${SMTP_HOST} \
-#     --env=MAILER_PORT=${SMTP_PORT} \
-#     --env=MAILER_AUTH_USER=${SMTP_USERNAME} \
-#     --env=MAILER_AUTH_PASSWORD=${SMTP_PASSWORD} \
-#     --env=MAILER_NOREPLY_EMAIL=JoplinServer \
-#     --env=MAILER_NOREPLY_NAME=${SMTP_USERNAME} \
-
 # Mail Settings
 rdb = agent.redis_connect(use_replica=True)
 smtp_settings = agent.get_smarthost_settings(rdb)
@@ -45,7 +34,6 @@ SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
 SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
 app_config = {
     "APP_BASE_URL": APP_BASE_URL,
-    "APP_PORT": APP_PORT,
     "MAILER_ENABLED": SMTP_ENABLED,
     "MAILER_SECURITY": SMTP_ENCRYPTION,
     "MAILER_HOST": SMTP_HOST,
