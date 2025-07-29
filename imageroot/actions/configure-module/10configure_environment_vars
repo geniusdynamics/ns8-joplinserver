@@ -13,39 +13,27 @@ import agent
 # If parsing fails, output everything to stderr
 data = json.load(sys.stdin)
 
-#This is specific to you module, so you need to change it accordingly.
+# This is specific to you module, so you need to change it accordingly.
 # we read a json stdin {"vars1":true, "var2":"foo", "vars3": 3} and we writ it to .config/state/environment
 
 # joplin url settings
 host = data.get("host", "")
 port = data.get("TCP_PORT", "")
-url = host+":"+port
-APP_BASE_URL = "https://"+host #"https://"+host
-APP_PORT=port = data.get("TCP_PORT", "")
-# --env=APP_BASE_URL=${APP_BASE_URL} \
-#     --env=MAILER_ENABLED=1 \
-#     --env=MAILER_SECURITY=starttls \
-#     --env=MAILER_HOST=${SMTP_HOST} \
-#     --env=MAILER_PORT=${SMTP_PORT} \
-#     --env=MAILER_AUTH_USER=${SMTP_USERNAME} \
-#     --env=MAILER_AUTH_PASSWORD=${SMTP_PASSWORD} \
-#     --env=MAILER_NOREPLY_EMAIL=JoplinServer \
-#     --env=MAILER_NOREPLY_NAME=${SMTP_USERNAME} \
-
+url = host + ":" + port
+APP_BASE_URL = "https://" + host  # "https://"+host
 # Mail Settings
 rdb = agent.redis_connect(use_replica=True)
 smtp_settings = agent.get_smarthost_settings(rdb)
 
-SMTP_HOST = smtp_settings['host']
-SMTP_PORT = smtp_settings['port']
-SMTP_USERNAME = smtp_settings['username']
-SMTP_PASSWORD = smtp_settings['password']
-SMTP_ENABLED = '1' if smtp_settings['enabled'] else ''
-SMTP_ENCRYPTION = smtp_settings['encrypt_smtp']
-SMTP_TLSVERIFY = 'true' if smtp_settings['tls_verify'] else 'false'
+SMTP_HOST = smtp_settings["host"]
+SMTP_PORT = smtp_settings["port"]
+SMTP_USERNAME = smtp_settings["username"]
+SMTP_PASSWORD = smtp_settings["password"]
+SMTP_ENABLED = "true" if smtp_settings["enabled"] else "false"
+SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
+SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
 app_config = {
     "APP_BASE_URL": APP_BASE_URL,
-    "APP_PORT": APP_PORT,
     "MAILER_ENABLED": SMTP_ENABLED,
     "MAILER_SECURITY": SMTP_ENCRYPTION,
     "MAILER_HOST": SMTP_HOST,
@@ -55,7 +43,7 @@ app_config = {
     "MAILER_NOREPLY_EMAIL": SMTP_USERNAME,
     "MAILER_NOREPLY_NAME": "JoplinServer",
 }
-agent.write_env("app.env", app_config)
+agent.write_envfile("app.env", app_config)
 
 
 agent.dump_env()

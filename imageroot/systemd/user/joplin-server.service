@@ -25,7 +25,7 @@ ExecStart=/usr/bin/podman run \
     --pod-id-file=%t/joplin.pod-id \
     --cidfile=%t/joplin-server.ctr-id \
     --cgroups=no-conmon \
-    --replace --name=%N \
+    --replace --name joplin-server \
     --env-file=smarthost.env \
     --env-file=%S/state/joplin-db.env \
     --env-file=%S/state/app.env \
