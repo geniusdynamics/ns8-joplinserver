@@ -4,29 +4,29 @@ This is an NS8 module for [Joplin](https://joplinapp.org/).
 
 Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device.
 
-
 ## Install
 
 Instantiate the module with:
 
-    add-module ghcr.io/compgeniuses/joplin:latest 1
+    add-module ghcr.io/geniusdynamics/joplin:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "joplin1", "image_name": "joplin", "image_url": "ghcr.io/compgeniuses/joplin:latest"}
+    {"module_id": "joplin1", "image_name": "joplin", "image_url": "ghcr.io/geniusdynamics/joplin:latest"}
 
 ## Configure
 
 Let's assume that the mattermost instance is named `joplin1`.
 
 Launch `configure-module`, by setting the following parameters:
+
 - `host`: a fully qualified domain name for the application
 - `http2https`: enable or disable HTTP to HTTPS redirection (true/false)
 - `lets_encrypt`: enable or disable Let's Encrypt certificate (true/false)
 
-
 Example:
+
 ```
 api-cli run module/joplin1/configure-module --data '{"host": "joplin.domain.com","lets_encrypt": false,"http2https": true}'
 ```
@@ -45,13 +45,15 @@ EOF
 
 ## Default Login Credetnilas
 
-Kindly Change these credentila sthe moment you login to  `joplin`.
+Kindly Change these credentila sthe moment you login to `joplin`.
 
 Default Login Credetnials are:
+
 - `Email`: admin@localhost
 - `Password`: admin
 
 The above command will:
+
 - start and configure the joplin instance
 - configure a virtual host for trafik to access the instance
 
@@ -69,16 +71,19 @@ MAILER_NOREPLY_EMAIL=my_email_address
 ```
 
 ## Get the configuration
+
 You can retrieve the configuration with
 
 ```
 api-cli run get-configuration --agent module/joplin1
 ```
+
 ## update
 
 To update the instance:
 
-    api-cli run update-module --data '{"module_url":"ghcr.io/compgeniuses/joplin:latest","instances":["joplin1"],"force":true}'
+    api-cli run update-module --data '{"module_url":"ghcr.io/geniusdynamics/joplin:latest","instances":["joplin1"],"force":true}'
+
 ## Uninstall
 
 To uninstall the instance:
@@ -89,7 +94,7 @@ To uninstall the instance:
 
 Some configuration settings, like the smarthost setup, are not part of the
 `configure-module` action input: they are discovered by looking at some
-Redis keys.  To ensure the module is always up-to-date with the
+Redis keys. To ensure the module is always up-to-date with the
 centralized [smarthost
 setup](https://nethserver.github.io/ns8-core/core/smarthost/) every time
 joplin starts, the command `bin/discover-smarthost` runs and refreshes
@@ -109,23 +114,25 @@ expected to work: it can be rewritten or discarded completely.
 some CLI are needed to debug
 
 - The module runs under an agent that initiate a lot of environment variables (in /home/joplin1/.config/state), it could be nice to verify them
-on the root terminal
+  on the root terminal
 
-    `runagent -m joplin1 env`
+      `runagent -m joplin1 env`
 
 - you can become runagent for testing scripts and initiate all environment variables
-  
-    `runagent -m joplin1`
 
- the path become : 
+  `runagent -m joplin1`
+
+the path become :
+
 ```
     echo $PATH
     /home/joplin1/.config/bin:/usr/local/agent/pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/
 ```
 
 - if you want to debug a container or see environment inside
- `runagent -m joplin1`
- ```
+  `runagent -m joplin1`
+
+```
 podman ps
 CONTAINER ID  IMAGE                                      COMMAND               CREATED        STATUS        PORTS                    NAMES
 d292c6ff28e9  localhost/podman-pause:4.6.1-1702418000                          9 minutes ago  Up 9 minutes  127.0.0.1:20015->80/tcp  80b8de25945f-infra
@@ -134,6 +141,7 @@ d8df02bf6f4a  docker.io/library/mariadb:10.11.5          --character-set-s...  9
 ```
 
 you can see what environment variable is inside the container
+
 ```
 podman exec  joplin-app env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -156,14 +164,14 @@ you can run a shell inside the container
 
 ```
 podman exec -ti   joplin-app sh
-/ # 
+/ #
 ```
+
 ## Testing
 
 Test the module using the `test-module.sh` script:
 
-
-    ./test-module.sh <NODE_ADDR> ghcr.io/compgeniuses/joplin:latest
+    ./test-module.sh <NODE_ADDR> ghcr.io/geniusdynamics/joplin:latest
 
 The tests are made using [Robot Framework](https://robotframework.org/)
 
