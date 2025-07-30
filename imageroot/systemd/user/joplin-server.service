@@ -26,6 +26,7 @@ ExecStart=/usr/bin/podman run \
     --cidfile=%t/joplin-server.ctr-id \
     --cgroups=no-conmon \
     --replace --name joplin-server \
+    --env DB_CLIENT=pg \
     --env-file=smarthost.env \
     --env-file=%S/state/joplin-db.env \
     --env-file=%S/state/app.env \
