@@ -34,7 +34,7 @@ SMTP_ENABLED = "true" if smtp_settings["enabled"] else "false"
 SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
 SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
 
-if re.match(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", SMTP_USERNAME):
+
 MAILER_NOREPLY_EMAIL = ""
 
 if re.match(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", SMTP_USERNAME):
