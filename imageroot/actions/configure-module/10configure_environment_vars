@@ -32,6 +32,16 @@ SMTP_PASSWORD = smtp_settings["password"]
 SMTP_ENABLED = "true" if smtp_settings["enabled"] else "false"
 SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
 SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
+
+# Extract maildomain from host (strip subdomain) to handle slef main for joplin
+host = SMTP_HOST
+parts = host.split('.')
+if len(parts) >= 2:
+    maildomain = '.'.join(parts[-2:])
+else:
+    maildomain = host  # fallback if host is weird or just a TLD
+
+MAILER_NOREPLY_EMAIL = f"noreply@{maildomain}"
 app_config = {
     "APP_BASE_URL": APP_BASE_URL,
     "MAILER_ENABLED": SMTP_ENABLED,
@@ -40,7 +50,7 @@ app_config = {
     "MAILER_PORT": SMTP_PORT,
     "MAILER_AUTH_USER": SMTP_USERNAME,
     "MAILER_AUTH_PASSWORD": SMTP_PASSWORD,
-    "MAILER_NOREPLY_EMAIL": SMTP_USERNAME,
+    "MAILER_NOREPLY_EMAIL": MAILER_NOREPLY_EMAIL,
     "MAILER_NOREPLY_NAME": "JoplinServer",
 }
 agent.write_envfile("app.env", app_config)
