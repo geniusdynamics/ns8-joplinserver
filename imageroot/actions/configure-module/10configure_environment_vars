@@ -8,6 +8,7 @@
 import json
 import sys
 import agent
+import re
 
 # Try to parse the stdin as JSON.
 # If parsing fails, output everything to stderr
@@ -33,13 +34,16 @@ SMTP_ENABLED = "true" if smtp_settings["enabled"] else "false"
 SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
 SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
 
+if re.match(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", SMTP_USERNAME):
+    MAILER_NOREPLY_EMAIL = SMTP_USERNAME
+else:
 # Extract maildomain from host (strip subdomain) to handle slef main for joplin
-host = SMTP_HOST
-parts = host.split('.')
+smtp_host = SMTP_HOST
+parts = smtp_host.split('.')
 if len(parts) >= 2:
     maildomain = '.'.join(parts[-2:])
 else:
-    maildomain = host  # fallback if host is weird or just a TLD
+    maildomain = smtp_host  # fallback if host is weird or just a TLD
 
 MAILER_NOREPLY_EMAIL = f"noreply@{maildomain}"
 app_config = {
