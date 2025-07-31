@@ -43,7 +43,7 @@ parts = smtp_host.split('.')
 if len(parts) >= 2:
     maildomain = '.'.join(parts[-2:])
 else:
-    maildomain = host  # fallback if host is weird or just a TLD
+    maildomain = smtp_host  # fallback if host is weird or just a TLD
 
 MAILER_NOREPLY_EMAIL = f"noreply@{maildomain}"
 app_config = {
