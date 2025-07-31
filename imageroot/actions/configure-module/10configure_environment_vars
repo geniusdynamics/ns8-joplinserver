@@ -40,7 +40,7 @@ MAILER_NOREPLY_EMAIL = ""
 if re.match(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", SMTP_USERNAME):
     MAILER_NOREPLY_EMAIL = SMTP_USERNAME
 else:
-    # Extract maildomain from host (strip subdomain) to handle slef main for joplin
+    # Extract maildomain from host (strip subdomain) to handle self mail for joplin
     smtp_host = SMTP_HOST
     parts = smtp_host.split('.')
     if len(parts) >= 2:
@@ -49,6 +49,7 @@ else:
     else:
         maildomain = smtp_host  # fallback if host is weird or just a TLD
         MAILER_NOREPLY_EMAIL = f"noreply@{maildomain}"
+
 app_config = {
     "APP_BASE_URL": APP_BASE_URL,
     "MAILER_ENABLED": SMTP_ENABLED,
