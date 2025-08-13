@@ -20,6 +20,7 @@ data = json.load(sys.stdin)
 # joplin url settings
 host = data.get("host", "")
 port = data.get("TCP_PORT", "")
+reply_email = data.get("reply_email")
 url = host + ":" + port
 APP_BASE_URL = "https://" + host  # "https://"+host
 # Mail Settings
@@ -35,20 +36,7 @@ SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
 SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
 
 
-MAILER_NOREPLY_EMAIL = ""
-
-if re.match(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", SMTP_USERNAME):
-    MAILER_NOREPLY_EMAIL = SMTP_USERNAME
-else:
-    # Extract maildomain from host (strip subdomain) to handle self mail for joplin
-    smtp_host = SMTP_HOST
-    parts = smtp_host.split('.')
-    if len(parts) >= 2:
-        maildomain = '.'.join(parts[-2:])
-        MAILER_NOREPLY_EMAIL = f"noreply@{maildomain}"
-    else:
-        maildomain = smtp_host  # fallback if host is weird or just a TLD
-        MAILER_NOREPLY_EMAIL = f"noreply@{maildomain}"
+MAILER_NOREPLY_EMAIL = reply_email
 
 app_config = {
     "APP_BASE_URL": APP_BASE_URL,
