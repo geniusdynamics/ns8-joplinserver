@@ -61,12 +61,21 @@
                 $t("settings.enabled")
               }}</template>
             </cv-toggle>
-              <!-- advanced options -->
+            <cv-text-input
+              :label="$t('settings.joplin_reply_email')"
+              placeholder="test@example.com"
+              v-model="reply_email"
+              class="mg-bottom"
+              :invalid-message="$t(error.reply_email)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="host"
+            >
+            </cv-text-input>
+            <!-- advanced options -->
             <cv-accordion ref="accordion" class="maxwidth mg-bottom">
               <cv-accordion-item :open="toggleAccordion[0]">
                 <template slot="title">{{ $t("settings.advanced") }}</template>
-                <template slot="content">
-                </template>
+                <template slot="content"> </template>
               </cv-accordion-item>
             </cv-accordion>
             <cv-row v-if="error.configureModule">
@@ -125,6 +134,7 @@ export default {
       host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: true,
+      reply_email: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -135,6 +145,7 @@ export default {
         host: "",
         lets_encrypt: "",
         http2https: "",
+        reply_email: "",
       },
     };
   },
@@ -164,13 +175,13 @@ export default {
       // register to task error
       this.core.$root.$once(
         `${taskAction}-aborted-${eventId}`,
-        this.getConfigurationAborted
+        this.getConfigurationAborted,
       );
 
       // register to task completion
       this.core.$root.$once(
         `${taskAction}-completed-${eventId}`,
-        this.getConfigurationCompleted
+        this.getConfigurationCompleted,
       );
 
       const res = await to(
@@ -181,7 +192,7 @@ export default {
             isNotificationHidden: true,
             eventId,
           },
-        })
+        }),
       );
       const err = res[0];
 
@@ -250,19 +261,19 @@ export default {
       // register to task error
       this.core.$root.$once(
         `${taskAction}-aborted-${eventId}`,
-        this.configureModuleAborted
+        this.configureModuleAborted,
       );
 
       // register to task validation
       this.core.$root.$once(
         `${taskAction}-validation-failed-${eventId}`,
-        this.configureModuleValidationFailed
+        this.configureModuleValidationFailed,
       );
 
       // register to task completion
       this.core.$root.$once(
         `${taskAction}-completed-${eventId}`,
-        this.configureModuleCompleted
+        this.configureModuleCompleted,
       );
       const res = await to(
         this.createModuleTaskForApp(this.instanceName, {
@@ -271,6 +282,7 @@ export default {
             host: this.host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            reply_email: this.reply_email,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
@@ -279,7 +291,7 @@ export default {
             description: this.$t("settings.configuring"),
             eventId,
           },
-        })
+        }),
       );
       const err = res[0];
 
