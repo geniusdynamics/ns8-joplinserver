@@ -35,7 +35,9 @@ SMTP_ENABLED = "true" if smtp_settings["enabled"] else "false"
 SMTP_ENCRYPTION = smtp_settings["encrypt_smtp"]
 SMTP_TLSVERIFY = "true" if smtp_settings["tls_verify"] else "false"
 
+
 MAILER_NOREPLY_EMAIL = reply_email
+
 app_config = {
     "APP_BASE_URL": APP_BASE_URL,
     "MAILER_ENABLED": SMTP_ENABLED,
