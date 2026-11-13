@@ -16,7 +16,8 @@ repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 reponame="joplin"
 # renovate: datasource=npm packageName=corepack
 corepack_version=0.36.0
-APP_VERSION="3.4.3"
+# renovate: datasource=docker packageName=docker.io/joplin/server
+APP_VERSION=3.4.3
 
 # Create a new empty container image
 container=$(buildah from scratch)
