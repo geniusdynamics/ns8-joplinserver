@@ -1,6 +1,9 @@
 *** Settings ***
 Library    SSHLibrary
 
+*** Variables ***
+${HOST}    joplinserver.example.org
+
 *** Test Cases ***
 Check if joplin is installed correctly
     ${output}  ${rc} =    Execute Command    add-module ${IMAGE_URL} 1
